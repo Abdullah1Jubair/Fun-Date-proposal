@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>will you go out with me? :)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- floating background hearts live here, injected by JS -->
+  <div class="bg-hearts" id="bgHearts" aria-hidden="true"></div>
+
+  <div class="crt-frame">
+    <div class="titlebar">
+      <div class="titlebar-dots"><span></span><span></span><span></span></div>
+      <div class="titlebar-label">love_letter.exe</div>
+      <button class="music-btn" id="musicBtn" title="toggle music" aria-label="toggle music">🔈</button>
+    </div>
+
+    <main class="screen-window" id="screenWindow">
+
+      <!-- SCREEN 1: LANDING -->
+      <section class="screen active" data-screen="landing">
+        <p class="eyebrow pixel-font">incoming message</p>
+        <h1 class="pixel-font title-sm">Hey, you...</h1>
+        <h2 class="pixel-font title-lg">Will you go out<br />with me?</h2>
+        <div class="pixel-heart heart-md floaty"></div>
+        <div class="btn-row" id="landingBtnRow">
+          <button class="pixel-btn btn-yes" id="yesBtn">❤️ YES</button>
+          <button class="pixel-btn btn-no" id="noBtn">💔 NO</button>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: CELEBRATION -->
+      <section class="screen" data-screen="celebration">
+        <div class="pixel-heart heart-lg pulse"></div>
+        <h1 class="pixel-font title-lg">YAY! 💗</h1>
+        <p class="subtext">Then let's plan our date...</p>
+      </section>
+
+      <!-- SCREEN 3: ACTIVITY SELECT -->
+      <section class="screen" data-screen="activity">
+        <p class="eyebrow pixel-font">step 1 of 3</p>
+        <h2 class="pixel-font title-md">Pick a date</h2>
+        <div class="card-grid" id="activityGrid"></div>
+      </section>
+
+      <!-- SCREEN 4: DAY SELECT -->
+      <section class="screen" data-screen="day">
+        <p class="eyebrow pixel-font">step 2 of 3</p>
+        <h2 class="pixel-font title-md">When are you free?</h2>
+        <div class="card-row" id="dayRow"></div>
+        <p class="or-divider">— or pick a date —</p>
+        <input type="date" id="dayPicker" class="pixel-date-input" />
+      </section>
+
+      <!-- SCREEN 5: TIME SELECT -->
+      <section class="screen" data-screen="time">
+        <p class="eyebrow pixel-font">step 3 of 3</p>
+        <h2 class="pixel-font title-md">What time?</h2>
+        <div class="card-row" id="timeOfDayRow"></div>
+        <div class="card-grid small" id="timeGrid"></div>
+      </section>
+
+      <!-- SCREEN 6: CONFIRMATION -->
+      <section class="screen" data-screen="confirm">
+        <h2 class="pixel-font title-md">It's a date! 💗</h2>
+        <div class="pixel-heart heart-md floaty"></div>
+        <div class="summary-card">
+          <div class="summary-row"><span class="summary-label pixel-font">PLAN</span><span class="summary-value" id="sumActivity">—</span></div>
+          <div class="summary-row"><span class="summary-label pixel-font">DATE</span><span class="summary-value" id="sumDay">—</span></div>
+          <div class="summary-row"><span class="summary-label pixel-font">TIME</span><span class="summary-value" id="sumTime">—</span></div>
+        </div>
+        <button class="pixel-btn btn-yes" id="confirmBtn">CONFIRM DATE 💕</button>
+      </section>
+
+      <!-- SCREEN 7: FINAL -->
+      <section class="screen" data-screen="final">
+        <div class="pixel-heart heart-xl pulse"></div>
+        <h1 class="pixel-font title-lg">Can't wait to<br />see you! 💗</h1>
+        <p class="subtext">Date successfully planned.</p>
+        <button class="pixel-btn btn-ghost" id="restartBtn">START OVER</button>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
