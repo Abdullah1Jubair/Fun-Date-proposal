@@ -304,9 +304,31 @@ function populateSummary() {
 function confirmDate() {
   celebrationBurst(confirmBtn, 20);
   playClick();
+  
+  // Put your Formspree Endpoint URL here
+  const formspreeURL = "https://formspree.io/f/xljrkowl";
+
+  // Send the data silently in the background
+  fetch(formspreeURL, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      Message: "New Date Accepted! 💗",
+      Plan: state.activity,
+      Day: state.day,
+      Time: state.clockTime
+    })
+  }).then(response => {
+    console.log("Answers sent successfully!");
+  }).catch(error => {
+    console.log("Error sending answers.");
+  });
+
   setTimeout(() => showScreen("final"), 500);
 }
-
 /* =========================================================
    RESET
    ========================================================= */
