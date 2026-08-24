@@ -342,7 +342,7 @@ function confirmDate() {
     body: JSON.stringify({
       Message: "New Date Accepted! 💗",
       Plan: state.activity,
-      Place: state.location,
+      Place: state.location, // <-- ADD THIS LINE
       Day: state.day,
       Time: state.clockTime
     })
