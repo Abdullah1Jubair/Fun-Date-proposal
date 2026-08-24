@@ -19,7 +19,12 @@ const CONFIG = {
   ],
 
   days: ["Friday", "Saturday", "Sunday"],
-
+  locations: [
+    { id: "dhanmondi", emoji: "☕", label: "Dhanmondi Cafe" },
+    { id: "baily", emoji: "🌃", label: "Baily Road" },
+    { id: "campus", emoji: "🏛️", label: "Campus Walk" },
+    { id: "surprise", emoji: "🎁", label: "Surprise Me!" }
+  ],
   timesOfDay: [
     { id: "morning", emoji: "☀️", label: "Morning" },
     { id: "afternoon", emoji: "🌤️", label: "Afternoon" },
@@ -31,7 +36,7 @@ const CONFIG = {
   finalMessage: "Can't wait to see you! 💗",
 
   // Optional: point this at an mp3 file placed next to index.html
-  musicSrc: "", // e.g. "assets/bg-music.mp3"
+  musicSrc: "cupid.mp3", // e.g. "assets/bg-music.mp3"
 };
 
 /* ---------------- state ---------------- */
@@ -207,13 +212,31 @@ function buildActivityCards() {
     activityGrid.appendChild(card);
   });
 }
+function buildLocationCards() {
+  locationGrid.innerHTML = "";
+  CONFIG.locations.forEach((loc) => {
+    const card = document.createElement("button");
+    card.className = "pixel-card";
+    card.type = "button";
+    card.innerHTML = `<span class="check">✔</span><span class="emoji">${loc.emoji}</span><span>${loc.label}</span>`;
+    card.addEventListener("click", () => selectLocation(loc, card));
+    locationGrid.appendChild(card);
+  });
+}
 
+function selectLocation(loc, cardEl) {
+  state.location = loc.label;
+  [...locationGrid.children].forEach((c) => c.classList.remove("selected"));
+  cardEl.classList.add("selected");
+  playClick();
+  setTimeout(() => showScreen("day"), 450);
+}
 function selectActivity(activity, cardEl) {
   state.activity = activity.label;
   [...activityGrid.children].forEach((c) => c.classList.remove("selected"));
   cardEl.classList.add("selected");
   playClick();
-  setTimeout(() => showScreen("day"), 450);
+  setTimeout(() => showScreen("location"), 450);
 }
 
 /* =========================================================
@@ -296,6 +319,7 @@ function selectTime(label, cardEl, group) {
    CONFIRMATION
    ========================================================= */
 function populateSummary() {
+  sumLocation.textContent = state.location || "—";
   sumActivity.textContent = state.activity || "—";
   sumDay.textContent = state.day || "—";
   sumTime.textContent = state.clockTime || "—";
@@ -318,6 +342,7 @@ function confirmDate() {
     body: JSON.stringify({
       Message: "New Date Accepted! 💗",
       Plan: state.activity,
+      Place: state.location,
       Day: state.day,
       Time: state.clockTime
     })
@@ -407,6 +432,7 @@ function playClick() {
    INIT
    ========================================================= */
 function init() {
+  buildLocationCards();
   buildActivityCards();
   buildDayCards();
   buildTimeCards();
